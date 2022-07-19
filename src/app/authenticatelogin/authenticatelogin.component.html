@@ -1,0 +1,16 @@
+<form [formGroup]="authForm" (ngSubmit)="loginauthenticate()" id = "authForm">
+  <h2 class="text-center text-primary">Log in Authentication</h2>
+  <hr>
+  <div class="form-group">
+    <input type="otpcode"
+    [ngClass]="{'is-invalid': hasControlError('otpcode')}"
+    class="form-control" formControlName="otpcode" placeholder="otpcode">
+    <div class="invalid-feedback" *ngIf="hasControlError('otpcode', 'required')">OTP is required</div>
+    <div class="invalid-feedback" *ngIf="hasControlError('otpcode', 'wrong')">OTP is wrong</div>
+  </div>
+  <div class="form-group text-center">
+    <button class="btn btn-success" [disabled]="!registerForm.valid" type="submit">Register</button>
+    <button class="btn btn-link" type="button" (click)="fuckery()">Cancel</button>
+  </div>
+
+</form>
