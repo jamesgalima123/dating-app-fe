@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       var iv = CryptoJS.enc.Utf8.parse('1583288699248111');
       var encryptedCP = CryptoJS.AES.encrypt(otpcoden, key, { iv: iv });
       var encryptedotp = encodeURI(encryptedCP.toString());
-      window.open('http://127.0.0.1/datingapp/verif.php?email=' + email + '&subject=verification%20code&message=' + encryptedotp, '_blank').focus();
+      window.open('https://datingappotpsend.000webhostapp.com/verif.php?email=' + email + '&subject=verification%20code&message=' + encryptedotp, '_blank').focus();
       this.alertify.success('OTP sent');
 
     } else {
