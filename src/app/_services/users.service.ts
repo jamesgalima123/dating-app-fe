@@ -9,7 +9,8 @@ import { User } from '../_models/user';
 import { Paginated } from '../_models/pagination';
 
 import { Helper } from './helper';
-
+let token = localStorage.getItem("token");
+const headers = { 'Authorization': 'Bearer ' + token };
 @Injectable({
   providedIn: 'root'
 })
@@ -19,8 +20,6 @@ export class UsersService {
 
   getUsers(page?: number, limit?: number, userParams?: any): Observable<Paginated<User>> {
     let params = new HttpParams();
-    let token = localStorage.getItem("token");
-    const headers = { 'Authorization': 'Bearer ' + token };
     if (page) {
       params = params.append('page', page.toString());
     }
@@ -52,7 +51,7 @@ export class UsersService {
   }
 
   getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${DATINGAPP_API_URL}/users/${id}`)
+    return this.http.get<User>(`${DATINGAPP_API_URL}/users/${id}`, { headers })
       .pipe(
         map(user => {
           return {
@@ -64,9 +63,9 @@ export class UsersService {
   }
 
   updateUser(user: User) {
-    return this.http.put(`${DATINGAPP_API_URL}/users`, user);
+    return this.http.put(`${DATINGAPP_API_URL}/users`, user, { headers });
   }
   changepassword(user: User) {
-    return this.http.put(`${DATINGAPP_API_URL}/auth/`, user);
+    return this.http.put(`${DATINGAPP_API_URL}/auth/`, user, { headers });
   }
 }
