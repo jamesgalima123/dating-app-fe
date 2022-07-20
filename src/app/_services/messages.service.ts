@@ -9,7 +9,8 @@ import { Paginated } from '../_models/pagination';
 import { Message } from '../_models/message';
 
 import { Helper } from './helper';
-
+let token = localStorage.getItem("token");
+const headers = { 'Authorization': 'Bearer ' + token };
 @Injectable({
   providedIn: 'root'
 })
@@ -29,7 +30,7 @@ export class MessagesService {
       params = params.append('limit', limit.toString());
     }
 
-    return this.http.get<Paginated<Message>>(`${DATINGAPP_API_URL}/messages`, { params })
+    return this.http.get<Paginated<Message>>(`${DATINGAPP_API_URL}/messages`, { params, headers })
       .pipe(
         map(response => {
           return {
@@ -48,7 +49,7 @@ export class MessagesService {
   }
 
   getMessagesThread(recipientId: number): Observable<Paginated<Message>> {
-    return this.http.get<Paginated<Message>>(`${DATINGAPP_API_URL}/messages/thread/${recipientId}`)
+    return this.http.get<Paginated<Message>>(`${DATINGAPP_API_URL}/messages/thread/${recipientId}`, { headers })
       .pipe(
         map(response => {
           return {
@@ -66,7 +67,7 @@ export class MessagesService {
   }
 
   sendMessage(message: Message) {
-    return this.http.post<Message>(`${DATINGAPP_API_URL}/messages`, message)
+    return this.http.post<Message>(`${DATINGAPP_API_URL}/messages`, { message, headers })
       .pipe(
         map(message => {
           return {
@@ -79,11 +80,11 @@ export class MessagesService {
   }
 
   deleteMessage(messageId: number) {
-    return this.http.delete(`${DATINGAPP_API_URL}/messages/${messageId}/delete`);
+    return this.http.delete(`${DATINGAPP_API_URL}/messages/${messageId}/delete`, { headers });
   }
 
   markSenderMessagesAsRead(recipientId: number) {
-    return this.http.post(`${DATINGAPP_API_URL}/messages/thread/${recipientId}/mark-as-read`, {});
+    return this.http.post(`${DATINGAPP_API_URL}/messages/thread/${recipientId}/mark-as-read`, { headers });
   }
 
 }

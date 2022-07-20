@@ -9,7 +9,8 @@ import { User } from '../_models/user';
 import { Paginated } from '../_models/pagination';
 
 import { Helper } from './helper';
-
+let token = localStorage.getItem("token");
+const headers = { 'Authorization': 'Bearer ' + token };
 @Injectable({
   providedIn: 'root'
 })
@@ -29,7 +30,7 @@ export class LikesService {
 
     params = params.append('filterSender', filterSender.toString());
 
-    return this.http.get<Paginated<User>>(`${DATINGAPP_API_URL}/likes`, { params })
+    return this.http.get<Paginated<User>>(`${DATINGAPP_API_URL}/likes`, { params, headers })
       .pipe(
         map(response => {
           // set default photo in case of null
@@ -47,7 +48,7 @@ export class LikesService {
   }
 
   sendLike(receiverId: number) {
-    return this.http.post(`${DATINGAPP_API_URL}/likes`, { receiverId });
+    return this.http.post(`${DATINGAPP_API_URL}/likes`, { receiverId, headers });
   }
 
 }
