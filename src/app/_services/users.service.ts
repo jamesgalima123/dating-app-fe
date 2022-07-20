@@ -66,6 +66,7 @@ export class UsersService {
     return this.http.put(`${DATINGAPP_API_URL}/users`, user, { headers });
   }
   changepassword(user: User) {
+    alert(user.newPassword);
     return this.http.put(`${DATINGAPP_API_URL}/auth/`, user, { headers });
   }
 }
