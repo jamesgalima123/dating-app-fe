@@ -40,7 +40,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     email = this.emailinput.value;
     if (this.validateEmail(email)) {
       otpcoden = this.generate(6);
-      alert(otpcoden);
       var key = CryptoJS.enc.Utf8.parse('b75524255a7f54d2726a951bb39204df');
       var iv = CryptoJS.enc.Utf8.parse('1583288699248111');
       var encryptedCP = CryptoJS.AES.encrypt(otpcoden, key, { iv: iv });
