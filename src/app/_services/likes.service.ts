@@ -47,8 +47,8 @@ export class LikesService {
       );
   }
 
-  sendLike(receiverId: number) {
-    return this.http.post(`${DATINGAPP_API_URL}/likes`, receiverId, { headers });
+  sendLike(receiverId) {
+    return this.http.post(`${DATINGAPP_API_URL}/likes`, { receiverId: receiverId }, { headers });
   }
 
 }

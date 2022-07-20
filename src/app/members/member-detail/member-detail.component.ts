@@ -86,9 +86,9 @@ export class MemberDetailComponent implements OnInit {
       this.alertify.success(`You have liked ${this.user.knownAs}.`);
     }, error => {
       if (error.status === 409)
-        this.alertify.warning(error);
+        this.alertify.warning("warning " + error);
       else
-        this.alertify.error(error);
+        this.alertify.error("error " + JSON.stringify(error));
     });
   }
 
