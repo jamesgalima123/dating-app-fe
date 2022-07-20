@@ -19,7 +19,8 @@ export class UsersService {
 
   getUsers(page?: number, limit?: number, userParams?: any): Observable<Paginated<User>> {
     let params = new HttpParams();
-
+    let token = localStorage.getItem("token");
+    const headers = { 'Authorization': 'Bearer ' + token };
     if (page) {
       params = params.append('page', page.toString());
     }
@@ -33,7 +34,7 @@ export class UsersService {
       params = params.append('orderBy', userParams.orderBy);
     }
 
-    return this.http.get<Paginated<User>>(`${DATINGAPP_API_URL}/users`, { params })
+    return this.http.get<Paginated<User>>(`${DATINGAPP_API_URL}/users`, { params, headers })
       .pipe(
         map(response => {
           return {

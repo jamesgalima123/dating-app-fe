@@ -56,7 +56,7 @@ export class AuthService {
   register(user: User) {
     return this.http.post(`${DATINGAPP_API_URL}/auth/register`, user);
   }
-  
+
   isLoggedIn() {
     const token = this.getToken();
     return !this.jwtHelper.isTokenExpired(token);
