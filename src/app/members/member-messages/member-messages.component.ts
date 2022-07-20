@@ -47,7 +47,7 @@ export class MemberMessagesComponent implements OnInit {
         this.newMessage.content = '';
         this.scrollToBottom();
       }, error => {
-        this.alertify.error(error.error);
+        this.alertify.error(JSON.stringify(error) + "eqwef");
       });
   }
 

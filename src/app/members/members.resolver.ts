@@ -29,7 +29,6 @@ export class MembersResolver implements Resolve<Paginated<User>> {
 
     return this.userService.getUsers(this.page, this.limit, this.userParams).pipe(
       catchError(error => {
-        alert(JSON.stringify(error));
         this.alertify.error('Problem retrieving data.');
         this.router.navigate(['/home']);
         return of(null);

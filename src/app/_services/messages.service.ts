@@ -66,8 +66,8 @@ export class MessagesService {
       );
   }
 
-  sendMessage(message: Message) {
-    return this.http.post<Message>(`${DATINGAPP_API_URL}/messages`, { message, headers })
+  sendMessage(message) {
+    return this.http.post<Message>(`${DATINGAPP_API_URL}/messages`, message, { headers })
       .pipe(
         map(message => {
           return {
